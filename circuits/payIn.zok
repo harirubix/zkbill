@@ -1,0 +1,228 @@
+from "./common/hashes/mimc/altbn254/mimc2.zok" import main as mimc2
+from "ecc/babyjubjubParams" import main as curveParams
+from "ecc/edwardsScalarMult" import main as scalarMult
+from "ecc/edwardsCompress" import main as edwardsCompress
+from "utils/pack/bool/pack256.zok" import main as bool_256_to_field
+from "utils/pack/bool/nonStrictUnpack256.zok" import main as field_to_bool_256
+from "./common/hashes/poseidon/poseidon.zok" import main as poseidon
+from "./common/merkle-tree/mimc/altbn254/verify-membership/height32.zok" import main as checkRoot
+
+struct Rct {
+        field amount
+field tax
+field amountPaid
+      }
+
+def main(\
+	public field amount,\
+	private field msgSender,\
+	private field balances_msgSender_oldCommitment_owner_secretKey,\
+	public field balances_msgSender_oldCommitment_nullifier,\
+	private  field balances_msgSender_oldCommitment_value,\
+	private field balances_msgSender_oldCommitment_salt,\
+	private bool balances_msgSender_oldCommitment_isDummy,\
+	public field commitmentRoot,\
+	private field balances_msgSender_oldCommitment_membershipWitness_index,\
+	private field[32] balances_msgSender_oldCommitment_membershipWitness_siblingPath,\
+	private field balances_msgSender_newCommitment_owner_publicKey,\
+	private field balances_msgSender_newCommitment_salt,\
+	public field balances_msgSender_newCommitment_commitment,\
+	private field unpaid_msgSender_oldCommitment_owner_secretKey,\
+	public field unpaid_msgSender_oldCommitment_nullifier,\
+	private  Rct unpaid_msgSender_oldCommitment_value,\
+	private field unpaid_msgSender_oldCommitment_salt,\
+	private bool unpaid_msgSender_oldCommitment_isDummy,\
+	private field unpaid_msgSender_oldCommitment_membershipWitness_index,\
+	private field[32] unpaid_msgSender_oldCommitment_membershipWitness_siblingPath,\
+	private field unpaid_msgSender_newCommitment_owner_publicKey,\
+	private field unpaid_msgSender_newCommitment_salt,\
+	public field unpaid_msgSender_newCommitment_commitment\
+) -> (bool):
+
+        
+        // We need to hard-code the mappingId's of mappings into the circuit:
+        field balances_mappingId = 5
+
+
+        field balances_msgSender = balances_msgSender_oldCommitment_value
+
+
+        // We need to hard-code the mappingId's of mappings into the circuit:
+        field unpaid_mappingId = 10
+
+
+        Rct unpaid_msgSender = unpaid_msgSender_oldCommitment_value
+
+
+        assert(unpaid_msgSender.amount != 0)
+
+balances_msgSender = balances_msgSender + amount
+
+		field total = unpaid_msgSender.amount + unpaid_msgSender.tax - unpaid_msgSender.amountPaid
+
+
+        field balances_msgSender_temp = balances_msgSender
+        unpaid_msgSender.amount = if balances_msgSender_temp >= total then 0 else unpaid_msgSender.amount fi
+        unpaid_msgSender.tax = if balances_msgSender_temp >= total then 0 else unpaid_msgSender.tax fi
+        unpaid_msgSender.amountPaid = if balances_msgSender_temp >= total then 0 else unpaid_msgSender.amountPaid fi
+        balances_msgSender = if balances_msgSender_temp >= total then balances_msgSender - total else balances_msgSender fi
+        unpaid_msgSender.amountPaid = if balances_msgSender_temp >= total then unpaid_msgSender.amountPaid else unpaid_msgSender.amountPaid + balances_msgSender fi
+        balances_msgSender = if balances_msgSender_temp >= total then balances_msgSender else 0 fi
+
+
+        field balances_msgSender_stateVarId_field = mimc2([balances_mappingId, msgSender])
+
+
+        // balances_msgSender_oldCommitment - PoKoSK:
+        // The correctness of this secret key will be constrained within the oldCommitment existence check.
+
+        field[2] balances_msgSender_oldCommitment_owner_publicKey_point = scalarMult(field_to_bool_256(balances_msgSender_oldCommitment_owner_secretKey), [curveParams().Gu, curveParams().Gv], curveParams())
+
+        bool balances_msgSender_oldCommitment_owner_publicKey_sign = edwardsCompress(balances_msgSender_oldCommitment_owner_publicKey_point)[0]
+
+        bool[254] balances_msgSender_oldCommitment_yBits = field_to_bool_256(balances_msgSender_oldCommitment_owner_publicKey_point[1])[2..256]
+        balances_msgSender_oldCommitment_yBits[0] = balances_msgSender_oldCommitment_owner_publicKey_sign
+
+        field balances_msgSender_oldCommitment_owner_publicKey = bool_256_to_field([false, false, ...balances_msgSender_oldCommitment_yBits])
+
+
+        // Nullify balances_msgSender:
+
+        field balances_msgSender_oldCommitment_nullifier_check_field = poseidon([\
+          balances_msgSender_stateVarId_field,\
+          balances_msgSender_oldCommitment_owner_secretKey,\
+          balances_msgSender_oldCommitment_salt\
+        ])
+
+        assert(\
+        field_to_bool_256(balances_msgSender_oldCommitment_nullifier)[8..256] == field_to_bool_256(balances_msgSender_oldCommitment_nullifier_check_field)[8..256]\
+        )
+
+
+        // balances_msgSender_oldCommitment_commitment: preimage check
+
+
+        field balances_msgSender_oldCommitment_commitment_field = poseidon([\
+          balances_msgSender_stateVarId_field,\
+          balances_msgSender_oldCommitment_value,\
+          balances_msgSender_oldCommitment_owner_publicKey,\
+          balances_msgSender_oldCommitment_salt        ])
+
+
+        // balances_msgSender_oldCommitment_commitment: existence check
+
+
+        field balances_msgSender_commitmentRoot_check = checkRoot(\
+          balances_msgSender_oldCommitment_membershipWitness_siblingPath,\
+          balances_msgSender_oldCommitment_commitment_field,\
+          balances_msgSender_oldCommitment_membershipWitness_index\
+        )
+
+
+        // Note: Don't bother actually asserting existence, if the oldCommitment is a dummy:
+        balances_msgSender_commitmentRoot_check = if balances_msgSender_oldCommitment_isDummy == true then commitmentRoot else balances_msgSender_commitmentRoot_check fi
+
+
+        assert(\
+          field_to_bool_256(commitmentRoot)[8..256] == field_to_bool_256(balances_msgSender_commitmentRoot_check)[8..256]\
+        )
+
+
+        // prepare secret state 'balances_msgSender' for commitment
+
+        field balances_msgSender_newCommitment_value_field = balances_msgSender
+
+        // balances_msgSender_newCommitment_commitment - preimage check
+
+        field balances_msgSender_newCommitment_commitment_check_field = poseidon([\
+          balances_msgSender_stateVarId_field,\
+          balances_msgSender_newCommitment_value_field,\
+          balances_msgSender_newCommitment_owner_publicKey,\
+          balances_msgSender_newCommitment_salt\
+        ])
+
+        assert(\
+          field_to_bool_256(balances_msgSender_newCommitment_commitment)[8..256] == field_to_bool_256(balances_msgSender_newCommitment_commitment_check_field)[8..256]\
+        )
+
+
+        field unpaid_msgSender_stateVarId_field = mimc2([unpaid_mappingId, msgSender])
+
+
+        // unpaid_msgSender_oldCommitment - PoKoSK:
+        // The correctness of this secret key will be constrained within the oldCommitment existence check.
+
+        field[2] unpaid_msgSender_oldCommitment_owner_publicKey_point = scalarMult(field_to_bool_256(unpaid_msgSender_oldCommitment_owner_secretKey), [curveParams().Gu, curveParams().Gv], curveParams())
+
+        bool unpaid_msgSender_oldCommitment_owner_publicKey_sign = edwardsCompress(unpaid_msgSender_oldCommitment_owner_publicKey_point)[0]
+
+        bool[254] unpaid_msgSender_oldCommitment_yBits = field_to_bool_256(unpaid_msgSender_oldCommitment_owner_publicKey_point[1])[2..256]
+        unpaid_msgSender_oldCommitment_yBits[0] = unpaid_msgSender_oldCommitment_owner_publicKey_sign
+
+        field unpaid_msgSender_oldCommitment_owner_publicKey = bool_256_to_field([false, false, ...unpaid_msgSender_oldCommitment_yBits])
+
+
+        // Nullify unpaid_msgSender:
+
+        field unpaid_msgSender_oldCommitment_nullifier_check_field = poseidon([\
+          unpaid_msgSender_stateVarId_field,\
+          unpaid_msgSender_oldCommitment_owner_secretKey,\
+          unpaid_msgSender_oldCommitment_salt\
+        ])
+
+        assert(\
+        field_to_bool_256(unpaid_msgSender_oldCommitment_nullifier)[8..256] == field_to_bool_256(unpaid_msgSender_oldCommitment_nullifier_check_field)[8..256]\
+        )
+
+
+          // unpaid_msgSender_oldCommitment_commitment: preimage check
+
+          field unpaid_msgSender_oldCommitment_commitment_field = poseidon([\
+            unpaid_msgSender_stateVarId_field,\
+            	 unpaid_msgSender_oldCommitment_value.amount,\
+	 unpaid_msgSender_oldCommitment_value.tax,\
+	 unpaid_msgSender_oldCommitment_value.amountPaid,\
+            unpaid_msgSender_oldCommitment_owner_publicKey,\
+            unpaid_msgSender_oldCommitment_salt\
+          ])
+
+
+        // unpaid_msgSender_oldCommitment_commitment: existence check
+
+
+        field unpaid_msgSender_commitmentRoot_check = checkRoot(\
+          unpaid_msgSender_oldCommitment_membershipWitness_siblingPath,\
+          unpaid_msgSender_oldCommitment_commitment_field,\
+          unpaid_msgSender_oldCommitment_membershipWitness_index\
+        )
+
+
+        // Note: Don't bother actually asserting existence, if the oldCommitment is a dummy:
+        unpaid_msgSender_commitmentRoot_check = if unpaid_msgSender_oldCommitment_isDummy == true then commitmentRoot else unpaid_msgSender_commitmentRoot_check fi
+
+
+        assert(\
+          field_to_bool_256(commitmentRoot)[8..256] == field_to_bool_256(unpaid_msgSender_commitmentRoot_check)[8..256]\
+        )
+
+
+          // prepare secret state 'unpaid_msgSender' for commitment
+
+          Rct unpaid_msgSender_newCommitment_value = Rct {  amount: unpaid_msgSender.amount, tax: unpaid_msgSender.tax, amountPaid: unpaid_msgSender.amountPaid }
+
+          // unpaid_msgSender_newCommitment_commitment - preimage check
+
+          field unpaid_msgSender_newCommitment_commitment_check_field = poseidon([\
+            unpaid_msgSender_stateVarId_field,\
+            	 unpaid_msgSender_newCommitment_value.amount,\
+	 unpaid_msgSender_newCommitment_value.tax,\
+	 unpaid_msgSender_newCommitment_value.amountPaid,\
+            unpaid_msgSender_newCommitment_owner_publicKey,\
+            unpaid_msgSender_newCommitment_salt\
+          ])
+
+          assert(\
+            field_to_bool_256(unpaid_msgSender_newCommitment_commitment)[8..256] == field_to_bool_256(unpaid_msgSender_newCommitment_commitment_check_field)[8..256]\
+          )
+
+         return true

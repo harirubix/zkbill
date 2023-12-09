@@ -1,0 +1,1649 @@
+{
+    "nodeType": "Folder",
+    "files": [
+        {
+            "nodeType": "File",
+            "fileName": "test",
+            "fileExtension": ".mjs",
+            "nodes": [
+                {
+                    "nodeType": "IntegrationTestBoilerplate",
+                    "contractName": "ReceiptShield",
+                    "functions": [
+                        {
+                            "nodeType": "IntegrationTestFunction",
+                            "name": "add",
+                            "parameters": {
+                                "nodeType": "ParameterList",
+                                "parameters": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "myrct",
+                                        "id": 20,
+                                        "isSecret": true,
+                                        "interactsWithSecret": true,
+                                        "declarationType": "parameter",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "Rct",
+                                            "properties": [
+                                                {
+                                                    "name": "amount",
+                                                    "type": "uint256"
+                                                },
+                                                {
+                                                    "name": "tax",
+                                                    "type": "uint256"
+                                                },
+                                                {
+                                                    "name": "amountPaid",
+                                                    "type": "uint256"
+                                                }
+                                            ],
+                                            "isStruct": true
+                                        }
+                                    },
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "amount",
+                                        "id": 22,
+                                        "isSecret": false,
+                                        "interactsWithSecret": true,
+                                        "declarationType": "parameter",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "uint256"
+                                        }
+                                    }
+                                ],
+                                "modifiedStateVariables": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "balances_msgSender",
+                                        "id": 0,
+                                        "isSecret": true,
+                                        "declarationType": "state",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "mapping(address => uint256)"
+                                        }
+                                    },
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "unpaid_msgSender",
+                                        "id": 0,
+                                        "isSecret": true,
+                                        "declarationType": "state",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "mapping(address => struct Receipt.Rct storage ref)"
+                                        }
+                                    }
+                                ]
+                            },
+                            "decrementsSecretState": false,
+                            "newCommitmentsRequired": true
+                        },
+                        {
+                            "nodeType": "IntegrationTestFunction",
+                            "name": "payIn",
+                            "parameters": {
+                                "nodeType": "ParameterList",
+                                "parameters": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "amount",
+                                        "id": 94,
+                                        "isSecret": false,
+                                        "interactsWithSecret": true,
+                                        "declarationType": "parameter",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "uint256"
+                                        }
+                                    }
+                                ],
+                                "modifiedStateVariables": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "balances_msgSender",
+                                        "id": 0,
+                                        "isSecret": true,
+                                        "declarationType": "state",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "mapping(address => uint256)"
+                                        }
+                                    },
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "unpaid_msgSender",
+                                        "id": 0,
+                                        "isSecret": true,
+                                        "declarationType": "state",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "mapping(address => struct Receipt.Rct storage ref)"
+                                        }
+                                    }
+                                ]
+                            },
+                            "decrementsSecretState": true,
+                            "newCommitmentsRequired": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeType": "SetupCommonFilesBoilerplate",
+            "contractName": "ReceiptShield",
+            "functionNames": [
+                "add",
+                "payIn"
+            ]
+        },
+        {
+            "nodeType": "File",
+            "fileName": "api_services",
+            "fileExtension": ".mjs",
+            "nodes": [
+                {
+                    "nodeType": "IntegrationApiServicesBoilerplate",
+                    "contractName": "ReceiptShield",
+                    "functions": [
+                        {
+                            "nodeType": "IntegrationApiServiceFunction",
+                            "name": "add",
+                            "parameters": {
+                                "nodeType": "ParameterList",
+                                "parameters": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "myrct",
+                                        "id": 20,
+                                        "isSecret": true,
+                                        "interactsWithSecret": true,
+                                        "declarationType": "parameter",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "Rct",
+                                            "properties": [
+                                                {
+                                                    "name": "amount",
+                                                    "type": "uint256"
+                                                },
+                                                {
+                                                    "name": "tax",
+                                                    "type": "uint256"
+                                                },
+                                                {
+                                                    "name": "amountPaid",
+                                                    "type": "uint256"
+                                                }
+                                            ],
+                                            "isStruct": true
+                                        }
+                                    },
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "amount",
+                                        "id": 22,
+                                        "isSecret": false,
+                                        "interactsWithSecret": true,
+                                        "declarationType": "parameter",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "uint256"
+                                        }
+                                    }
+                                ],
+                                "modifiedStateVariables": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "balances_msgSender",
+                                        "id": 0,
+                                        "isSecret": true,
+                                        "declarationType": "state",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "mapping(address => uint256)"
+                                        }
+                                    },
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "unpaid_msgSender",
+                                        "id": 0,
+                                        "isSecret": true,
+                                        "declarationType": "state",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "mapping(address => struct Receipt.Rct storage ref)"
+                                        }
+                                    }
+                                ]
+                            },
+                            "returnParameters": {
+                                "nodeType": "ParameterList",
+                                "parameters": [],
+                                "modifiedStateVariables": []
+                            },
+                            "decrementsSecretState": [],
+                            "newCommitmentsRequired": true
+                        },
+                        {
+                            "nodeType": "IntegrationApiServiceFunction",
+                            "name": "payIn",
+                            "parameters": {
+                                "nodeType": "ParameterList",
+                                "parameters": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "amount",
+                                        "id": 94,
+                                        "isSecret": false,
+                                        "interactsWithSecret": true,
+                                        "declarationType": "parameter",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "uint256"
+                                        }
+                                    }
+                                ],
+                                "modifiedStateVariables": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "balances_msgSender",
+                                        "id": 0,
+                                        "isSecret": true,
+                                        "declarationType": "state",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "mapping(address => uint256)"
+                                        }
+                                    },
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "unpaid_msgSender",
+                                        "id": 0,
+                                        "isSecret": true,
+                                        "declarationType": "state",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "mapping(address => struct Receipt.Rct storage ref)"
+                                        }
+                                    }
+                                ]
+                            },
+                            "returnParameters": {
+                                "nodeType": "ParameterList",
+                                "parameters": [],
+                                "modifiedStateVariables": []
+                            },
+                            "decrementsSecretState": [
+                                "balances_msgSender"
+                            ],
+                            "newCommitmentsRequired": true
+                        }
+                    ],
+                    "constructorParams": [],
+                    "contractImports": []
+                }
+            ]
+        },
+        {
+            "nodeType": "File",
+            "fileName": "api_routes",
+            "fileExtension": ".mjs",
+            "nodes": [
+                {
+                    "nodeType": "IntegrationApiRoutesBoilerplate",
+                    "contractName": "ReceiptShield",
+                    "functions": [
+                        {
+                            "nodeType": "IntegrationApiRoutesFunction",
+                            "name": "add"
+                        },
+                        {
+                            "nodeType": "IntegrationApiRoutesFunction",
+                            "name": "payIn"
+                        }
+                    ],
+                    "contractImports": []
+                }
+            ]
+        },
+        {
+            "nodeType": "EditableCommitmentCommonFilesBoilerplate"
+        },
+        {
+            "nodeType": "File",
+            "fileName": "add",
+            "fileExtension": ".mjs",
+            "nodes": [
+                {
+                    "nodeType": "Imports",
+                    "imports": []
+                },
+                {
+                    "nodeType": "FunctionDefinition",
+                    "name": "add",
+                    "contractName": "ReceiptShield",
+                    "parameters": {
+                        "nodeType": "ParameterList",
+                        "parameters": [
+                            {
+                                "nodeType": "VariableDeclaration",
+                                "name": "myrct",
+                                "id": 20,
+                                "isSecret": true,
+                                "interactsWithSecret": true,
+                                "declarationType": "parameter",
+                                "typeName": {
+                                    "nodeType": "ElementaryTypeName",
+                                    "name": "Rct",
+                                    "properties": [
+                                        {
+                                            "name": "amount",
+                                            "type": "uint256"
+                                        },
+                                        {
+                                            "name": "tax",
+                                            "type": "uint256"
+                                        },
+                                        {
+                                            "name": "amountPaid",
+                                            "type": "uint256"
+                                        }
+                                    ],
+                                    "isStruct": true
+                                }
+                            },
+                            {
+                                "nodeType": "VariableDeclaration",
+                                "name": "amount",
+                                "id": 22,
+                                "isSecret": false,
+                                "interactsWithSecret": true,
+                                "declarationType": "parameter",
+                                "typeName": {
+                                    "nodeType": "ElementaryTypeName",
+                                    "name": "uint256"
+                                }
+                            }
+                        ],
+                        "modifiedStateVariables": [
+                            {
+                                "nodeType": "VariableDeclaration",
+                                "name": "balances_msgSender",
+                                "id": 0,
+                                "isSecret": true,
+                                "declarationType": "state",
+                                "typeName": {
+                                    "nodeType": "ElementaryTypeName",
+                                    "name": "mapping(address => uint256)"
+                                }
+                            },
+                            {
+                                "nodeType": "VariableDeclaration",
+                                "name": "unpaid_msgSender",
+                                "id": 0,
+                                "isSecret": true,
+                                "declarationType": "state",
+                                "typeName": {
+                                    "nodeType": "ElementaryTypeName",
+                                    "name": "mapping(address => struct Receipt.Rct storage ref)"
+                                }
+                            }
+                        ]
+                    },
+                    "body": {
+                        "nodeType": "Block",
+                        "preStatements": [
+                            {
+                                "nodeType": "InitialiseKeys",
+                                "contractName": "ReceiptShield"
+                            },
+                            {
+                                "nodeType": "InitialisePreimage",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "privateStateName": "balances_msgSender",
+                                        "stateVarId": [
+                                            5,
+                                            "msg"
+                                        ],
+                                        "accessedOnly": false,
+                                        "mappingKey": "msg",
+                                        "mappingName": "balances",
+                                        "structProperties": null
+                                    },
+                                    "unpaid_msgSender": {
+                                        "privateStateName": "unpaid_msgSender",
+                                        "stateVarId": [
+                                            10,
+                                            "msg"
+                                        ],
+                                        "accessedOnly": false,
+                                        "mappingKey": "msg",
+                                        "mappingName": "unpaid",
+                                        "structProperties": [
+                                            "amount",
+                                            "tax",
+                                            "amountPaid"
+                                        ]
+                                    }
+                                }
+                            },
+                            {
+                                "nodeType": "ReadPreimage",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "increment": "parseInt(amount.integer, 10) - parseInt(total.integer, 10)",
+                                        "stateVarId": [
+                                            5,
+                                            "msg"
+                                        ],
+                                        "isWhole": true,
+                                        "structProperties": null,
+                                        "mappingKey": "msg",
+                                        "mappingName": "balances",
+                                        "nullifierRequired": true,
+                                        "accessedOnly": false,
+                                        "initialised": true,
+                                        "owner": null,
+                                        "ownerIsSecret": null,
+                                        "ownerIsParam": null
+                                    },
+                                    "unpaid_msgSender": {
+                                        "stateVarId": [
+                                            10,
+                                            "msg"
+                                        ],
+                                        "isWhole": true,
+                                        "structProperties": [
+                                            "amount",
+                                            "tax",
+                                            "amountPaid"
+                                        ],
+                                        "mappingKey": "msg",
+                                        "mappingName": "unpaid",
+                                        "nullifierRequired": true,
+                                        "accessedOnly": false,
+                                        "initialised": true,
+                                        "owner": null,
+                                        "ownerIsSecret": null,
+                                        "ownerIsParam": null
+                                    }
+                                },
+                                "contractName": "ReceiptShield"
+                            },
+                            {
+                                "nodeType": "MembershipWitness",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "privateStateName": "balances_msgSender",
+                                        "accessedOnly": false,
+                                        "isWhole": true
+                                    },
+                                    "unpaid_msgSender": {
+                                        "privateStateName": "unpaid_msgSender",
+                                        "accessedOnly": false,
+                                        "isWhole": true
+                                    }
+                                },
+                                "contractName": "ReceiptShield"
+                            }
+                        ],
+                        "statements": [
+                            {
+                                "nodeType": "VariableDeclarationStatement",
+                                "id": 71,
+                                "interactsWithSecret": true,
+                                "declarations": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "unpaid_msgSender",
+                                        "id": 0,
+                                        "isSecret": true,
+                                        "isAccessed": true,
+                                        "declarationType": "state",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName"
+                                        },
+                                        "isStruct": true
+                                    }
+                                ]
+                            },
+                            {
+                                "nodeType": "VariableDeclarationStatement",
+                                "id": 61,
+                                "interactsWithSecret": true,
+                                "declarations": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "balances_msgSender",
+                                        "id": 0,
+                                        "isSecret": true,
+                                        "isAccessed": true,
+                                        "declarationType": "state",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "nodeType": "VariableDeclarationStatement",
+                                "id": 49,
+                                "interactsWithSecret": true,
+                                "declarations": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "total",
+                                        "id": 43,
+                                        "isSecret": true,
+                                        "interactsWithSecret": true,
+                                        "declarationType": "localStack",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "uint256"
+                                        }
+                                    }
+                                ],
+                                "initialValue": {
+                                    "nodeType": "BinaryOperation",
+                                    "leftExpression": {
+                                        "nodeType": "MemberAccess",
+                                        "name": "myrct",
+                                        "memberName": "amount",
+                                        "expression": {
+                                            "nodeType": "Identifier",
+                                            "name": "myrct",
+                                            "subType": "struct Receipt.Rct memory"
+                                        },
+                                        "subType": "uint256"
+                                    },
+                                    "operator": "+",
+                                    "rightExpression": {
+                                        "nodeType": "MemberAccess",
+                                        "name": "myrct",
+                                        "memberName": "tax",
+                                        "expression": {
+                                            "nodeType": "Identifier",
+                                            "name": "myrct",
+                                            "subType": "struct Receipt.Rct memory"
+                                        },
+                                        "subType": "uint256"
+                                    }
+                                }
+                            },
+                            {
+                                "nodeType": "IfStatement",
+                                "condition": {
+                                    "nodeType": "BinaryOperation",
+                                    "leftExpression": {
+                                        "nodeType": "Identifier",
+                                        "name": "amount",
+                                        "subType": "uint256"
+                                    },
+                                    "operator": ">=",
+                                    "rightExpression": {
+                                        "nodeType": "Identifier",
+                                        "name": "total",
+                                        "subType": "uint256"
+                                    }
+                                },
+                                "trueBody": [
+                                    {
+                                        "nodeType": "ExpressionStatement",
+                                        "id": 61,
+                                        "expression": {
+                                            "nodeType": "Assignment",
+                                            "operator": "+=",
+                                            "leftHandSide": {
+                                                "nodeType": "Identifier",
+                                                "name": "balances_msgSender",
+                                                "subType": "uint256"
+                                            },
+                                            "rightHandSide": {
+                                                "nodeType": "BinaryOperation",
+                                                "leftExpression": {
+                                                    "nodeType": "Identifier",
+                                                    "name": "amount",
+                                                    "subType": "uint256"
+                                                },
+                                                "operator": "-",
+                                                "rightExpression": {
+                                                    "nodeType": "Identifier",
+                                                    "name": "total",
+                                                    "subType": "uint256"
+                                                }
+                                            }
+                                        },
+                                        "interactsWithSecret": true
+                                    }
+                                ],
+                                "falseBody": [
+                                    {
+                                        "nodeType": "ExpressionStatement",
+                                        "id": 71,
+                                        "expression": {
+                                            "nodeType": "Assignment",
+                                            "operator": "=",
+                                            "leftHandSide": {
+                                                "nodeType": "MemberAccess",
+                                                "name": "unpaid_msgSender",
+                                                "memberName": "amount",
+                                                "expression": {
+                                                    "nodeType": "Identifier",
+                                                    "name": "unpaid_msgSender",
+                                                    "subType": "struct Receipt.Rct storage ref"
+                                                },
+                                                "subType": "uint256"
+                                            },
+                                            "rightHandSide": {
+                                                "nodeType": "MemberAccess",
+                                                "name": "myrct",
+                                                "memberName": "amount",
+                                                "expression": {
+                                                    "nodeType": "Identifier",
+                                                    "name": "myrct",
+                                                    "subType": "struct Receipt.Rct memory"
+                                                },
+                                                "subType": "uint256"
+                                            }
+                                        },
+                                        "interactsWithSecret": true
+                                    },
+                                    {
+                                        "nodeType": "ExpressionStatement",
+                                        "id": 80,
+                                        "expression": {
+                                            "nodeType": "Assignment",
+                                            "operator": "=",
+                                            "leftHandSide": {
+                                                "nodeType": "MemberAccess",
+                                                "name": "unpaid_msgSender",
+                                                "memberName": "tax",
+                                                "expression": {
+                                                    "nodeType": "Identifier",
+                                                    "name": "unpaid_msgSender",
+                                                    "subType": "struct Receipt.Rct storage ref"
+                                                },
+                                                "subType": "uint256"
+                                            },
+                                            "rightHandSide": {
+                                                "nodeType": "MemberAccess",
+                                                "name": "myrct",
+                                                "memberName": "tax",
+                                                "expression": {
+                                                    "nodeType": "Identifier",
+                                                    "name": "myrct",
+                                                    "subType": "struct Receipt.Rct memory"
+                                                },
+                                                "subType": "uint256"
+                                            }
+                                        },
+                                        "interactsWithSecret": true
+                                    },
+                                    {
+                                        "nodeType": "ExpressionStatement",
+                                        "id": 88,
+                                        "expression": {
+                                            "nodeType": "Assignment",
+                                            "operator": "=",
+                                            "leftHandSide": {
+                                                "nodeType": "MemberAccess",
+                                                "name": "unpaid_msgSender",
+                                                "memberName": "amountPaid",
+                                                "expression": {
+                                                    "nodeType": "Identifier",
+                                                    "name": "unpaid_msgSender",
+                                                    "subType": "struct Receipt.Rct storage ref"
+                                                },
+                                                "subType": "uint256"
+                                            },
+                                            "rightHandSide": {
+                                                "nodeType": "Identifier",
+                                                "name": "amount",
+                                                "subType": "uint256"
+                                            }
+                                        },
+                                        "interactsWithSecret": true
+                                    }
+                                ]
+                            },
+                            {
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "leftHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "balances_msgSender",
+                                    "subType": ""
+                                },
+                                "rightHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "balances_msgSender",
+                                    "subType": "generalNumber"
+                                }
+                            },
+                            {
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "leftHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": ""
+                                },
+                                "rightHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": "generalNumber"
+                                }
+                            },
+                            {
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "leftHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": ""
+                                },
+                                "rightHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": "generalNumber"
+                                }
+                            },
+                            {
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "leftHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": ""
+                                },
+                                "rightHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": "generalNumber"
+                                }
+                            }
+                        ],
+                        "postStatements": [
+                            {
+                                "nodeType": "CalculateNullifier",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "isWhole": true
+                                    },
+                                    "unpaid_msgSender": {
+                                        "isWhole": true
+                                    }
+                                }
+                            },
+                            {
+                                "nodeType": "CalculateCommitment",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "privateStateName": "balances_msgSender",
+                                        "stateVarId": [
+                                            5,
+                                            "msg"
+                                        ],
+                                        "isWhole": true,
+                                        "nullifierRequired": true,
+                                        "structProperties": null,
+                                        "owner": null,
+                                        "ownerIsSecret": null
+                                    },
+                                    "unpaid_msgSender": {
+                                        "privateStateName": "unpaid_msgSender",
+                                        "stateVarId": [
+                                            10,
+                                            "msg"
+                                        ],
+                                        "isWhole": true,
+                                        "nullifierRequired": true,
+                                        "structProperties": [
+                                            "amount",
+                                            "tax",
+                                            "amountPaid"
+                                        ],
+                                        "owner": null,
+                                        "ownerIsSecret": null
+                                    }
+                                }
+                            },
+                            {
+                                "nodeType": "GenerateProof",
+                                "circuitName": "add",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "privateStateName": "balances_msgSender",
+                                        "stateVarId": [
+                                            5,
+                                            "msg"
+                                        ],
+                                        "accessedOnly": false,
+                                        "nullifierRequired": true,
+                                        "increment": [
+                                            {
+                                                "name": "amount",
+                                                "precedingOperator": "+"
+                                            },
+                                            {
+                                                "name": "total",
+                                                "precedingOperator": "-"
+                                            }
+                                        ],
+                                        "structProperties": null,
+                                        "isMapping": true,
+                                        "isWhole": true,
+                                        "initialisationRequired": true,
+                                        "owner": null,
+                                        "ownerIsSecret": null
+                                    },
+                                    "unpaid_msgSender": {
+                                        "privateStateName": "unpaid_msgSender",
+                                        "stateVarId": [
+                                            10,
+                                            "msg"
+                                        ],
+                                        "accessedOnly": false,
+                                        "nullifierRequired": true,
+                                        "structProperties": [
+                                            "amount",
+                                            "tax",
+                                            "amountPaid"
+                                        ],
+                                        "isMapping": true,
+                                        "isWhole": true,
+                                        "initialisationRequired": true,
+                                        "owner": null,
+                                        "ownerIsSecret": null
+                                    }
+                                },
+                                "parameters": [
+                                    "balances_msgSender",
+                                    "unpaid_msgSender",
+                                    "myrct.amount",
+                                    "myrct.tax",
+                                    "myrct.amountPaid",
+                                    "amount"
+                                ]
+                            },
+                            {
+                                "nodeType": "SendTransaction",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "isWhole": true,
+                                        "accessedOnly": false,
+                                        "nullifierRequired": true
+                                    },
+                                    "unpaid_msgSender": {
+                                        "isWhole": true,
+                                        "accessedOnly": false,
+                                        "nullifierRequired": true
+                                    }
+                                },
+                                "functionName": "add",
+                                "contractName": "ReceiptShield",
+                                "publicInputs": [
+                                    "amount"
+                                ]
+                            },
+                            {
+                                "nodeType": "WritePreimage",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "stateVarId": [
+                                            5,
+                                            "msg"
+                                        ],
+                                        "isWhole": true,
+                                        "structProperties": null,
+                                        "mappingKey": "msg",
+                                        "mappingName": "balances",
+                                        "nullifierRequired": true,
+                                        "owner": null,
+                                        "ownerIsSecret": null
+                                    },
+                                    "unpaid_msgSender": {
+                                        "stateVarId": [
+                                            10,
+                                            "msg"
+                                        ],
+                                        "isWhole": true,
+                                        "structProperties": [
+                                            "amount",
+                                            "tax",
+                                            "amountPaid"
+                                        ],
+                                        "mappingKey": "msg",
+                                        "mappingName": "unpaid",
+                                        "nullifierRequired": true,
+                                        "owner": null,
+                                        "ownerIsSecret": null
+                                    }
+                                },
+                                "contractName": "ReceiptShield",
+                                "onChainKeyRegistry": false
+                            }
+                        ]
+                    },
+                    "returnParameters": {
+                        "nodeType": "ParameterList",
+                        "parameters": [],
+                        "modifiedStateVariables": []
+                    }
+                }
+            ]
+        },
+        {
+            "nodeType": "File",
+            "fileName": "payIn",
+            "fileExtension": ".mjs",
+            "nodes": [
+                {
+                    "nodeType": "Imports",
+                    "imports": []
+                },
+                {
+                    "nodeType": "FunctionDefinition",
+                    "name": "payIn",
+                    "contractName": "ReceiptShield",
+                    "parameters": {
+                        "nodeType": "ParameterList",
+                        "parameters": [
+                            {
+                                "nodeType": "VariableDeclaration",
+                                "name": "amount",
+                                "id": 94,
+                                "isSecret": false,
+                                "interactsWithSecret": true,
+                                "declarationType": "parameter",
+                                "typeName": {
+                                    "nodeType": "ElementaryTypeName",
+                                    "name": "uint256"
+                                }
+                            }
+                        ],
+                        "modifiedStateVariables": [
+                            {
+                                "nodeType": "VariableDeclaration",
+                                "name": "balances_msgSender",
+                                "id": 0,
+                                "isSecret": true,
+                                "declarationType": "state",
+                                "typeName": {
+                                    "nodeType": "ElementaryTypeName",
+                                    "name": "mapping(address => uint256)"
+                                }
+                            },
+                            {
+                                "nodeType": "VariableDeclaration",
+                                "name": "unpaid_msgSender",
+                                "id": 0,
+                                "isSecret": true,
+                                "declarationType": "state",
+                                "typeName": {
+                                    "nodeType": "ElementaryTypeName",
+                                    "name": "mapping(address => struct Receipt.Rct storage ref)"
+                                }
+                            }
+                        ]
+                    },
+                    "body": {
+                        "nodeType": "Block",
+                        "preStatements": [
+                            {
+                                "nodeType": "InitialiseKeys",
+                                "contractName": "ReceiptShield"
+                            },
+                            {
+                                "nodeType": "InitialisePreimage",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "privateStateName": "balances_msgSender",
+                                        "stateVarId": [
+                                            5,
+                                            "msg"
+                                        ],
+                                        "accessedOnly": false,
+                                        "mappingKey": "msg",
+                                        "mappingName": "balances",
+                                        "structProperties": null
+                                    },
+                                    "unpaid_msgSender": {
+                                        "privateStateName": "unpaid_msgSender",
+                                        "stateVarId": [
+                                            10,
+                                            "msg"
+                                        ],
+                                        "accessedOnly": false,
+                                        "mappingKey": "msg",
+                                        "mappingName": "unpaid",
+                                        "structProperties": [
+                                            "amount",
+                                            "tax",
+                                            "amountPaid"
+                                        ]
+                                    }
+                                }
+                            },
+                            {
+                                "nodeType": "ReadPreimage",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "increment": "parseInt(amount.integer, 10) + parseInt(total.integer, 10)",
+                                        "stateVarId": [
+                                            5,
+                                            "msg"
+                                        ],
+                                        "isWhole": true,
+                                        "structProperties": null,
+                                        "mappingKey": "msg",
+                                        "mappingName": "balances",
+                                        "nullifierRequired": true,
+                                        "accessedOnly": false,
+                                        "initialised": true,
+                                        "owner": null,
+                                        "ownerIsSecret": null,
+                                        "ownerIsParam": null
+                                    },
+                                    "unpaid_msgSender": {
+                                        "increment": {
+                                            "amount": "",
+                                            "tax": "",
+                                            "amountPaid": "parseInt(balances_msgSender.integer, 10)"
+                                        },
+                                        "stateVarId": [
+                                            10,
+                                            "msg"
+                                        ],
+                                        "isWhole": true,
+                                        "structProperties": [
+                                            "amount",
+                                            "tax",
+                                            "amountPaid"
+                                        ],
+                                        "mappingKey": "msg",
+                                        "mappingName": "unpaid",
+                                        "nullifierRequired": true,
+                                        "accessedOnly": false,
+                                        "initialised": true,
+                                        "owner": null,
+                                        "ownerIsSecret": null,
+                                        "ownerIsParam": null
+                                    }
+                                },
+                                "contractName": "ReceiptShield"
+                            },
+                            {
+                                "nodeType": "MembershipWitness",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "privateStateName": "balances_msgSender",
+                                        "accessedOnly": false,
+                                        "isWhole": true
+                                    },
+                                    "unpaid_msgSender": {
+                                        "privateStateName": "unpaid_msgSender",
+                                        "accessedOnly": false,
+                                        "isWhole": true
+                                    }
+                                },
+                                "contractName": "ReceiptShield"
+                            }
+                        ],
+                        "statements": [
+                            {
+                                "nodeType": "VariableDeclarationStatement",
+                                "id": 147,
+                                "interactsWithSecret": true,
+                                "declarations": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "unpaid_msgSender",
+                                        "id": 0,
+                                        "isSecret": true,
+                                        "isAccessed": true,
+                                        "declarationType": "state",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName"
+                                        },
+                                        "isStruct": true
+                                    }
+                                ]
+                            },
+                            {
+                                "nodeType": "VariableDeclarationStatement",
+                                "id": 113,
+                                "interactsWithSecret": true,
+                                "declarations": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "balances_msgSender",
+                                        "id": 0,
+                                        "isSecret": true,
+                                        "isAccessed": true,
+                                        "declarationType": "state",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName"
+                                        }
+                                    }
+                                ],
+                                "initialValue": {
+                                    "nodeType": "Assignment",
+                                    "operator": "+=",
+                                    "leftHandSide": {
+                                        "nodeType": "Identifier",
+                                        "name": "balances_msgSender",
+                                        "subType": "uint256"
+                                    },
+                                    "rightHandSide": {
+                                        "nodeType": "Identifier",
+                                        "name": "amount",
+                                        "subType": "uint256"
+                                    }
+                                }
+                            },
+                            {
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "leftHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "balances_msgSender",
+                                    "subType": ""
+                                },
+                                "rightHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "balances_msgSender",
+                                    "subType": "generalNumber"
+                                }
+                            },
+                            {
+                                "nodeType": "VariableDeclarationStatement",
+                                "id": 133,
+                                "interactsWithSecret": true,
+                                "declarations": [
+                                    {
+                                        "nodeType": "VariableDeclaration",
+                                        "name": "total",
+                                        "id": 115,
+                                        "isSecret": true,
+                                        "interactsWithSecret": true,
+                                        "declarationType": "localStack",
+                                        "typeName": {
+                                            "nodeType": "ElementaryTypeName",
+                                            "name": "uint256"
+                                        }
+                                    }
+                                ],
+                                "initialValue": {
+                                    "nodeType": "BinaryOperation",
+                                    "leftExpression": {
+                                        "nodeType": "BinaryOperation",
+                                        "leftExpression": {
+                                            "nodeType": "MemberAccess",
+                                            "name": "unpaid_msgSender",
+                                            "memberName": "amount",
+                                            "expression": {
+                                                "nodeType": "Identifier",
+                                                "name": "unpaid_msgSender",
+                                                "subType": "struct Receipt.Rct storage ref"
+                                            },
+                                            "subType": "uint256"
+                                        },
+                                        "operator": "+",
+                                        "rightExpression": {
+                                            "nodeType": "MemberAccess",
+                                            "name": "unpaid_msgSender",
+                                            "memberName": "tax",
+                                            "expression": {
+                                                "nodeType": "Identifier",
+                                                "name": "unpaid_msgSender",
+                                                "subType": "struct Receipt.Rct storage ref"
+                                            },
+                                            "subType": "uint256"
+                                        }
+                                    },
+                                    "operator": "-",
+                                    "rightExpression": {
+                                        "nodeType": "MemberAccess",
+                                        "name": "unpaid_msgSender",
+                                        "memberName": "amountPaid",
+                                        "expression": {
+                                            "nodeType": "Identifier",
+                                            "name": "unpaid_msgSender",
+                                            "subType": "struct Receipt.Rct storage ref"
+                                        },
+                                        "subType": "uint256"
+                                    }
+                                }
+                            },
+                            {
+                                "nodeType": "IfStatement",
+                                "condition": {
+                                    "nodeType": "BinaryOperation",
+                                    "leftExpression": {
+                                        "nodeType": "Identifier",
+                                        "name": "balances_msgSender",
+                                        "subType": "uint256"
+                                    },
+                                    "operator": ">=",
+                                    "rightExpression": {
+                                        "nodeType": "Identifier",
+                                        "name": "total",
+                                        "subType": "uint256"
+                                    }
+                                },
+                                "trueBody": [
+                                    {
+                                        "nodeType": "ExpressionStatement",
+                                        "id": 147,
+                                        "expression": {
+                                            "nodeType": "Assignment",
+                                            "operator": "=",
+                                            "leftHandSide": {
+                                                "nodeType": "MemberAccess",
+                                                "name": "unpaid_msgSender",
+                                                "memberName": "amount",
+                                                "expression": {
+                                                    "nodeType": "Identifier",
+                                                    "name": "unpaid_msgSender",
+                                                    "subType": "struct Receipt.Rct storage ref"
+                                                },
+                                                "subType": "uint256"
+                                            },
+                                            "rightHandSide": {
+                                                "nodeType": "Literal",
+                                                "value": "0"
+                                            }
+                                        },
+                                        "interactsWithSecret": true
+                                    },
+                                    {
+                                        "nodeType": "ExpressionStatement",
+                                        "id": 155,
+                                        "expression": {
+                                            "nodeType": "Assignment",
+                                            "operator": "=",
+                                            "leftHandSide": {
+                                                "nodeType": "MemberAccess",
+                                                "name": "unpaid_msgSender",
+                                                "memberName": "tax",
+                                                "expression": {
+                                                    "nodeType": "Identifier",
+                                                    "name": "unpaid_msgSender",
+                                                    "subType": "struct Receipt.Rct storage ref"
+                                                },
+                                                "subType": "uint256"
+                                            },
+                                            "rightHandSide": {
+                                                "nodeType": "Literal",
+                                                "value": "0"
+                                            }
+                                        },
+                                        "interactsWithSecret": true
+                                    },
+                                    {
+                                        "nodeType": "ExpressionStatement",
+                                        "id": 163,
+                                        "expression": {
+                                            "nodeType": "Assignment",
+                                            "operator": "=",
+                                            "leftHandSide": {
+                                                "nodeType": "MemberAccess",
+                                                "name": "unpaid_msgSender",
+                                                "memberName": "amountPaid",
+                                                "expression": {
+                                                    "nodeType": "Identifier",
+                                                    "name": "unpaid_msgSender",
+                                                    "subType": "struct Receipt.Rct storage ref"
+                                                },
+                                                "subType": "uint256"
+                                            },
+                                            "rightHandSide": {
+                                                "nodeType": "Literal",
+                                                "value": "0"
+                                            }
+                                        },
+                                        "interactsWithSecret": true
+                                    },
+                                    {
+                                        "nodeType": "ExpressionStatement",
+                                        "id": 170,
+                                        "expression": {
+                                            "nodeType": "Assignment",
+                                            "operator": "-=",
+                                            "leftHandSide": {
+                                                "nodeType": "Identifier",
+                                                "name": "balances_msgSender",
+                                                "subType": "uint256"
+                                            },
+                                            "rightHandSide": {
+                                                "nodeType": "Identifier",
+                                                "name": "total",
+                                                "subType": "uint256"
+                                            }
+                                        },
+                                        "interactsWithSecret": true
+                                    }
+                                ],
+                                "falseBody": [
+                                    {
+                                        "nodeType": "ExpressionStatement",
+                                        "id": 182,
+                                        "expression": {
+                                            "nodeType": "Assignment",
+                                            "operator": "+=",
+                                            "leftHandSide": {
+                                                "nodeType": "MemberAccess",
+                                                "name": "unpaid_msgSender",
+                                                "memberName": "amountPaid",
+                                                "expression": {
+                                                    "nodeType": "Identifier",
+                                                    "name": "unpaid_msgSender",
+                                                    "subType": "struct Receipt.Rct storage ref"
+                                                },
+                                                "subType": "uint256"
+                                            },
+                                            "rightHandSide": {
+                                                "nodeType": "Identifier",
+                                                "name": "balances_msgSender",
+                                                "subType": "uint256"
+                                            }
+                                        },
+                                        "interactsWithSecret": true
+                                    },
+                                    {
+                                        "nodeType": "ExpressionStatement",
+                                        "id": 189,
+                                        "expression": {
+                                            "nodeType": "Assignment",
+                                            "operator": "=",
+                                            "leftHandSide": {
+                                                "nodeType": "Identifier",
+                                                "name": "balances_msgSender",
+                                                "subType": "uint256"
+                                            },
+                                            "rightHandSide": {
+                                                "nodeType": "Literal",
+                                                "value": "0"
+                                            }
+                                        },
+                                        "interactsWithSecret": true
+                                    }
+                                ]
+                            },
+                            {
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "leftHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": ""
+                                },
+                                "rightHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": "generalNumber"
+                                }
+                            },
+                            {
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "leftHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": ""
+                                },
+                                "rightHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": "generalNumber"
+                                }
+                            },
+                            {
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "leftHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": ""
+                                },
+                                "rightHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": "generalNumber"
+                                }
+                            },
+                            {
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "leftHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "balances_msgSender",
+                                    "subType": ""
+                                },
+                                "rightHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "balances_msgSender",
+                                    "subType": "generalNumber"
+                                }
+                            },
+                            {
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "leftHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": ""
+                                },
+                                "rightHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "unpaid_msgSender",
+                                    "subType": "generalNumber"
+                                }
+                            },
+                            {
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "leftHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "balances_msgSender",
+                                    "subType": ""
+                                },
+                                "rightHandSide": {
+                                    "nodeType": "Identifier",
+                                    "name": "balances_msgSender",
+                                    "subType": "generalNumber"
+                                }
+                            }
+                        ],
+                        "postStatements": [
+                            {
+                                "nodeType": "CalculateNullifier",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "isWhole": true
+                                    },
+                                    "unpaid_msgSender": {
+                                        "isWhole": true
+                                    }
+                                }
+                            },
+                            {
+                                "nodeType": "CalculateCommitment",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "privateStateName": "balances_msgSender",
+                                        "stateVarId": [
+                                            5,
+                                            "msg"
+                                        ],
+                                        "isWhole": true,
+                                        "nullifierRequired": true,
+                                        "structProperties": null,
+                                        "owner": null,
+                                        "ownerIsSecret": null
+                                    },
+                                    "unpaid_msgSender": {
+                                        "privateStateName": "unpaid_msgSender",
+                                        "stateVarId": [
+                                            10,
+                                            "msg"
+                                        ],
+                                        "isWhole": true,
+                                        "nullifierRequired": true,
+                                        "structProperties": [
+                                            "amount",
+                                            "tax",
+                                            "amountPaid"
+                                        ],
+                                        "owner": null,
+                                        "ownerIsSecret": null
+                                    }
+                                }
+                            },
+                            {
+                                "nodeType": "GenerateProof",
+                                "circuitName": "payIn",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "privateStateName": "balances_msgSender",
+                                        "stateVarId": [
+                                            5,
+                                            "msg"
+                                        ],
+                                        "accessedOnly": false,
+                                        "nullifierRequired": true,
+                                        "increment": [
+                                            {
+                                                "name": "amount",
+                                                "precedingOperator": "+"
+                                            },
+                                            {
+                                                "name": "total",
+                                                "precedingOperator": "-"
+                                            }
+                                        ],
+                                        "structProperties": null,
+                                        "isMapping": true,
+                                        "isWhole": true,
+                                        "initialisationRequired": true,
+                                        "owner": null,
+                                        "ownerIsSecret": null
+                                    },
+                                    "unpaid_msgSender": {
+                                        "privateStateName": "unpaid_msgSender",
+                                        "stateVarId": [
+                                            10,
+                                            "msg"
+                                        ],
+                                        "accessedOnly": false,
+                                        "nullifierRequired": true,
+                                        "increment": {
+                                            "amount": [],
+                                            "tax": [],
+                                            "amountPaid": [
+                                                {
+                                                    "name": "balances_msgSender",
+                                                    "precedingOperator": "+"
+                                                }
+                                            ]
+                                        },
+                                        "structProperties": [
+                                            "amount",
+                                            "tax",
+                                            "amountPaid"
+                                        ],
+                                        "isMapping": true,
+                                        "isWhole": true,
+                                        "initialisationRequired": true,
+                                        "owner": null,
+                                        "ownerIsSecret": null
+                                    }
+                                },
+                                "parameters": [
+                                    "balances_msgSender",
+                                    "unpaid_msgSender",
+                                    "amount"
+                                ]
+                            },
+                            {
+                                "nodeType": "SendTransaction",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "isWhole": true,
+                                        "accessedOnly": false,
+                                        "nullifierRequired": true
+                                    },
+                                    "unpaid_msgSender": {
+                                        "isWhole": true,
+                                        "accessedOnly": false,
+                                        "nullifierRequired": true
+                                    }
+                                },
+                                "functionName": "payIn",
+                                "contractName": "ReceiptShield",
+                                "publicInputs": [
+                                    "amount"
+                                ]
+                            },
+                            {
+                                "nodeType": "WritePreimage",
+                                "privateStates": {
+                                    "balances_msgSender": {
+                                        "stateVarId": [
+                                            5,
+                                            "msg"
+                                        ],
+                                        "isWhole": true,
+                                        "structProperties": null,
+                                        "mappingKey": "msg",
+                                        "mappingName": "balances",
+                                        "nullifierRequired": true,
+                                        "owner": null,
+                                        "ownerIsSecret": null
+                                    },
+                                    "unpaid_msgSender": {
+                                        "stateVarId": [
+                                            10,
+                                            "msg"
+                                        ],
+                                        "isWhole": true,
+                                        "structProperties": [
+                                            "amount",
+                                            "tax",
+                                            "amountPaid"
+                                        ],
+                                        "mappingKey": "msg",
+                                        "mappingName": "unpaid",
+                                        "nullifierRequired": true,
+                                        "owner": null,
+                                        "ownerIsSecret": null
+                                    }
+                                },
+                                "contractName": "ReceiptShield",
+                                "onChainKeyRegistry": false
+                            }
+                        ]
+                    },
+                    "returnParameters": {
+                        "nodeType": "ParameterList",
+                        "parameters": [],
+                        "modifiedStateVariables": []
+                    },
+                    "decrementedSecretStates": [
+                        "balances_msgSender"
+                    ],
+                    "decrementsSecretState": true
+                }
+            ]
+        }
+    ]
+}
